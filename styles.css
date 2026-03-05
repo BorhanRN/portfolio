@@ -46,8 +46,8 @@
   transition-property: background-color, color, border-color, box-shadow,
     text-shadow, opacity, fill, stroke, outline-color, background, transform,
     clip-path;
-  transition-duration: 430ms;
-  transition-timing-function: ease;
+  transition-duration: 520ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 :root.theme-switching .theme-toggle__horizon,
@@ -55,6 +55,43 @@
 :root.theme-switching .theme-toggle__horizon *::before,
 :root.theme-switching .theme-toggle__horizon *::after {
   transition-timing-function: cubic-bezier(0, 0, 0.15, 1.25);
+}
+
+:root.theme-switching body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 1;
+  animation: theme-bg-crossfade 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+:root[data-prev-theme="dark"].theme-switching body::after {
+  background:
+    radial-gradient(circle at 15% -10%, rgba(101, 217, 255, 0.18), transparent 32%),
+    radial-gradient(circle at 90% 15%, rgba(255, 164, 95, 0.2), transparent 28%),
+    radial-gradient(circle at 70% 100%, rgba(135, 255, 207, 0.13), transparent 36%),
+    linear-gradient(140deg, #04060d 0%, #060911 45%, #0c1324 100%);
+}
+
+:root[data-prev-theme="light"].theme-switching body::after {
+  background:
+    radial-gradient(circle at 8% 6%, rgba(82, 149, 255, 0.24), transparent 42%),
+    radial-gradient(circle at 88% 12%, rgba(255, 166, 96, 0.18), transparent 36%),
+    radial-gradient(circle at 78% 86%, rgba(113, 208, 171, 0.16), transparent 40%),
+    radial-gradient(circle at 24% 82%, rgba(163, 177, 255, 0.18), transparent 42%),
+    linear-gradient(145deg, #f9fbff 0%, #edf4ff 44%, #e2ebfb 100%);
+}
+
+@keyframes theme-bg-crossfade {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 *,
@@ -373,17 +410,52 @@ button:focus-visible {
     0 0 16px rgba(74, 108, 176, 0.2);
 }
 
+:root[data-theme="light"] body {
+  background:
+    radial-gradient(circle at 8% 6%, rgba(82, 149, 255, 0.24), transparent 42%),
+    radial-gradient(circle at 88% 12%, rgba(255, 166, 96, 0.18), transparent 36%),
+    radial-gradient(circle at 78% 86%, rgba(113, 208, 171, 0.16), transparent 40%),
+    radial-gradient(circle at 24% 82%, rgba(163, 177, 255, 0.18), transparent 42%),
+    linear-gradient(145deg, #f9fbff 0%, #edf4ff 44%, #e2ebfb 100%);
+}
+
+:root[data-theme="light"] .gateway-body {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(82, 149, 255, 0.22), transparent 40%),
+    radial-gradient(circle at 90% 14%, rgba(255, 166, 96, 0.16), transparent 34%),
+    radial-gradient(circle at 74% 88%, rgba(113, 208, 171, 0.14), transparent 38%),
+    radial-gradient(circle at 22% 84%, rgba(163, 177, 255, 0.16), transparent 40%),
+    linear-gradient(145deg, #f9fbff 0%, #edf4ff 44%, #e2ebfb 100%);
+}
+
+:root[data-theme="light"] body::before {
+  opacity: 0.13;
+  background-size: 3px 3px, 5px 5px;
+}
+
 :root[data-theme="light"] .site-header {
-  background: rgba(243, 248, 255, 0.92);
+  background: linear-gradient(
+    180deg,
+    rgba(249, 252, 255, 0.95),
+    rgba(238, 246, 255, 0.9)
+  );
 }
 
 :root[data-theme="light"] .bg-grid {
-  opacity: 0.34;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(circle at 16% 18%, rgba(72, 129, 230, 0.22), transparent 34%),
+    radial-gradient(circle at 82% 16%, rgba(219, 145, 82, 0.18), transparent 32%),
+    radial-gradient(circle at 74% 84%, rgba(75, 157, 132, 0.16), transparent 38%),
+    radial-gradient(circle at 18% 82%, rgba(129, 149, 230, 0.17), transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0));
+  mask-image: radial-gradient(circle at center, black 36%, transparent 100%);
 }
 
 :root[data-theme="light"] .bg-orb {
-  opacity: 0.3;
-  mix-blend-mode: multiply;
+  opacity: 0.42;
+  mix-blend-mode: soft-light;
+  filter: blur(34px) saturate(1.18);
 }
 
 :root[data-theme="light"] .gateway-intro h1 {
@@ -535,9 +607,9 @@ button:focus-visible {
   top: 0;
   z-index: 6;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto 1fr;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
   padding: 0.9rem min(3vw, 2rem);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(10px);
@@ -553,11 +625,23 @@ button:focus-visible {
   justify-self: start;
 }
 
+.header-menu-toggle {
+  display: none;
+}
+
+.header-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-width: 0;
+}
+
 .site-nav {
   display: flex;
   gap: 1rem;
-  justify-self: center;
   justify-content: center;
+  flex: 1;
 }
 
 .site-nav a {
@@ -572,10 +656,10 @@ button:focus-visible {
 }
 
 .header-actions {
-  justify-self: end;
   display: flex;
   align-items: center;
   gap: 0.95rem;
+  flex-shrink: 0;
 }
 
 .theme-toggle {
@@ -1332,7 +1416,7 @@ main {
 
 @media (max-width: 760px) {
   :root {
-    --anchor-offset: 8.6rem;
+    --anchor-offset: 7.4rem;
   }
 
   .gateway-actions {
@@ -1354,18 +1438,110 @@ main {
 
   .site-header {
     grid-template-columns: 1fr auto;
-    align-items: flex-start;
+    align-items: center;
+    row-gap: 0.55rem;
+  }
+
+  .header-menu-toggle {
+    width: 2.2rem;
+    height: 2.2rem;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 0.6rem;
+    background: var(--panel);
+    color: var(--text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 180ms ease, background-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .header-menu-toggle:hover {
+    border-color: var(--line-strong);
+    background: var(--panel-strong);
+  }
+
+  .header-menu-icon,
+  .header-menu-icon::before,
+  .header-menu-icon::after {
+    content: "";
+    display: block;
+    width: 1.05rem;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+
+  .header-menu-icon {
+    position: relative;
+  }
+
+  .header-menu-icon::before,
+  .header-menu-icon::after {
+    position: absolute;
+    left: 0;
+  }
+
+  .header-menu-icon::before {
+    transform: translateY(-0.34rem);
+  }
+
+  .header-menu-icon::after {
+    transform: translateY(0.34rem);
+  }
+
+  .site-header.is-menu-open .header-menu-icon {
+    background: transparent;
+  }
+
+  .site-header.is-menu-open .header-menu-icon::before {
+    transform: translateY(0) rotate(45deg);
+  }
+
+  .site-header.is-menu-open .header-menu-icon::after {
+    transform: translateY(0) rotate(-45deg);
+  }
+
+  .header-menu {
+    grid-column: 1 / -1;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.55rem;
+    padding-top: 0.45rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .site-header.is-menu-open .header-menu {
+    display: flex;
+    animation: fade-rise 180ms ease both;
   }
 
   .site-nav {
     width: 100%;
-    grid-column: 1 / -1;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+
+  .site-nav a {
+    font-size: 1rem;
+    padding: 0.32rem 0;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.8rem;
+    padding-top: 0.12rem;
   }
 
   .theme-toggle {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
   }
 
   .project-card,

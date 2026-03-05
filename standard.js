@@ -15,7 +15,36 @@ const caseModalBackdrop = document.getElementById("case-modal-backdrop");
 const caseModalClose = document.getElementById("case-modal-close");
 const caseModalContents = document.querySelectorAll(".case-modal-content");
 const caseModalBody = document.querySelector(".case-modal-body");
+const siteHeader = document.querySelector(".site-header");
+const headerMenuToggle = document.querySelector(".header-menu-toggle");
+const headerNavLinks = document.querySelectorAll(".site-nav a");
 let lastCaseStudyTrigger = null;
+
+function setHeaderMenuOpen(isOpen) {
+  if (!siteHeader || !headerMenuToggle) return;
+  siteHeader.classList.toggle("is-menu-open", isOpen);
+  headerMenuToggle.setAttribute("aria-expanded", String(isOpen));
+  headerMenuToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+}
+
+if (siteHeader && headerMenuToggle) {
+  headerMenuToggle.addEventListener("click", () => {
+    const isOpen = siteHeader.classList.contains("is-menu-open");
+    setHeaderMenuOpen(!isOpen);
+  });
+
+  headerNavLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      setHeaderMenuOpen(false);
+    });
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 760) {
+      setHeaderMenuOpen(false);
+    }
+  });
+}
 
 function resetCaseModalScroll() {
   if (!caseModalBody) return;
@@ -171,6 +200,9 @@ if (downloadResumeBtn) {
 }
 
 document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    setHeaderMenuOpen(false);
+  }
   if (!caseModalBackdrop || caseModalBackdrop.hidden) return;
   if (event.key === "Escape") {
     closeCaseModal();

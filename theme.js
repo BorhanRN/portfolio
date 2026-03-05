@@ -2,7 +2,8 @@ const THEME_STORAGE_KEY = "portfolio-theme";
 const THEME_DARK = "dark";
 const THEME_LIGHT = "light";
 const THEME_SWITCHING_CLASS = "theme-switching";
-const THEME_TRANSITION_MS = 430;
+const THEME_TRANSITION_MS = 520;
+const THEME_PREV_ATTR = "data-prev-theme";
 
 const themeRoot = document.documentElement;
 const themeToggleButtons = document.querySelectorAll(".theme-toggle");
@@ -53,11 +54,13 @@ function applyTheme(theme) {
   });
 }
 
-function startThemeTransition() {
+function startThemeTransition(previousTheme) {
   if (prefersReducedMotion()) {
     return;
   }
 
+  const prevTheme = previousTheme === THEME_LIGHT ? THEME_LIGHT : THEME_DARK;
+  themeRoot.setAttribute(THEME_PREV_ATTR, prevTheme);
   themeRoot.classList.add(THEME_SWITCHING_CLASS);
   // Force style recalculation so transition rules are active before theme values change.
   void themeRoot.offsetHeight;
@@ -68,6 +71,7 @@ function startThemeTransition() {
 
   themeTransitionTimeoutId = window.setTimeout(() => {
     themeRoot.classList.remove(THEME_SWITCHING_CLASS);
+    themeRoot.removeAttribute(THEME_PREV_ATTR);
     themeTransitionTimeoutId = null;
   }, THEME_TRANSITION_MS);
 }
@@ -77,7 +81,7 @@ applyTheme(currentTheme);
 
 themeToggleButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    startThemeTransition();
+    startThemeTransition(currentTheme);
     currentTheme = currentTheme === THEME_DARK ? THEME_LIGHT : THEME_DARK;
     applyTheme(currentTheme);
     saveTheme(currentTheme);
