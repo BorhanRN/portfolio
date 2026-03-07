@@ -27,6 +27,35 @@
     <header class="site-header">
       <a class="brand" href="index.html">Borhan Rahmani</a>
       <button
+        class="theme-toggle header-mobile-theme"
+        type="button"
+        aria-label="Switch to light mode"
+        aria-pressed="false"
+        title="Switch to light mode"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          width="1em"
+          height="1em"
+          fill="currentColor"
+          class="theme-toggle__horizon"
+          viewBox="0 0 32 32"
+        >
+          <clipPath id="theme-toggle__horizon__mask-mobile">
+            <path d="M0 0h32v29H0z" />
+          </clipPath>
+          <path
+            d="M30.7 29.9H1.3c-.7 0-1.3.5-1.3 1.1 0 .6.6 1 1.3 1h29.3c.7 0 1.3-.5 1.3-1.1.1-.5-.5-1-1.2-1z"
+          />
+          <g clip-path="url(#theme-toggle__horizon__mask-mobile)">
+            <path
+              d="M16 8.8c-3.4 0-6.1 2.8-6.1 6.1s2.7 6.3 6.1 6.3 6.1-2.8 6.1-6.1-2.7-6.3-6.1-6.3zm13.3 11L26 15l3.3-4.8c.3-.5.1-1.1-.5-1.2l-5.7-1-1-5.7c-.1-.6-.8-.8-1.2-.5L16 5.1l-4.8-3.3c-.5-.4-1.2-.1-1.3.4L8.9 8 3.2 9c-.6.1-.8.8-.5 1.2L6 15l-3.3 4.8c-.3.5-.1 1.1.5 1.2l5.7 1 1 5.7c.1.6.8.8 1.2.5L16 25l4.8 3.3c.5.3 1.1.1 1.2-.5l1-5.7 5.7-1c.7-.1.9-.8.6-1.3zM16 22.5A7.6 7.6 0 0 1 8.3 15c0-4.2 3.5-7.5 7.7-7.5s7.7 3.4 7.7 7.5c0 4.2-3.4 7.5-7.7 7.5z"
+            />
+          </g>
+        </svg>
+      </button>
+      <button
         class="header-menu-toggle"
         type="button"
         aria-expanded="false"
@@ -44,7 +73,7 @@
         </nav>
         <div class="header-actions">
           <button
-            class="theme-toggle"
+            class="theme-toggle header-desktop-theme"
             type="button"
             aria-label="Switch to light mode"
             aria-pressed="false"
@@ -134,11 +163,11 @@
               through personalized nudges and progress visualization.
             </p>
             <ul class="chip-list">
-              <li>Field Research</li>
-              <li>Prototyping</li>
-              <li>R / Statistical Analysis</li>
-              <li>Figma</li>
-              <li>TypeScript</li>
+              <li class="chip-research">Field Research</li>
+              <li class="chip-design">Prototyping</li>
+              <li class="chip-analysis">R / Statistical Analysis</li>
+              <li class="chip-design">Figma</li>
+              <li class="chip-code">TypeScript</li>
             </ul>
             <a
               class="text-link case-study-trigger"
@@ -153,9 +182,9 @@
             <h2>PortObello</h2>
             <p>A port logistics management system that streamlines queries and pulls.</p>
             <ul class="chip-list">
-              <li>SQL</li>
-              <li>System Architecture</li>
-              <li>REST API</li>
+              <li class="chip-analysis">SQL</li>
+              <li class="chip-architecture">System Architecture</li>
+              <li class="chip-code">REST API</li>
             </ul>
             <a
               class="text-link case-study-trigger"
@@ -170,9 +199,9 @@
             <h2>Marketplace Redesign</h2>
             <p>Research led redesign that improves findability and trust metrics.</p>
             <ul class="chip-list">
-              <li>Figma</li>
-              <li>Interactions</li>
-              <li>Usability Tests</li>
+              <li class="chip-design">Figma</li>
+              <li class="chip-design">Interactions</li>
+              <li class="chip-research">Usability Tests</li>
             </ul>
             <a
               class="text-link case-study-trigger"
@@ -187,9 +216,9 @@
             <h2>Evently.</h2>
             <p>Event planning web app that turns guest info into clear data for hosts.</p>
             <ul class="chip-list">
-              <li>Full Stack</li>
-              <li>Data Viz</li>
-              <li>Client-Server</li>
+              <li class="chip-code">Full Stack</li>
+              <li class="chip-analysis">Data Viz</li>
+              <li class="chip-architecture">Client-Server</li>
             </ul>
             <a
               class="text-link case-study-trigger"

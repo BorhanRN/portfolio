@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inspired By: Batman</title>
+    <meta
+      name="description"
+      content="Portfolio showcasing UX, product, and technical work."
+    />
+    <link rel="icon" type="image/png" href="assets/favicon-rounded.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="theme-batman.css" />
+  </head>
+  <body class="portfolio-body">
+    <div class="gotham-prelude" id="gotham-prelude" aria-hidden="true">
+      <p>GOTHAM SYSTEM ONLINE</p>
+    </div>
+    <div class="gotham-video-stack" aria-hidden="true">
+      <video
+        class="gotham-video-layer is-active"
+        id="gotham-video-a"
+        autoplay
+        muted
+        playsinline
+        preload="metadata"
+      >
+        <source src="assets/gotham-rain-loop.mp4" type="video/mp4" />
+      </video>
+      <video
+        class="gotham-video-layer"
+        id="gotham-video-b"
+        muted
+        playsinline
+        preload="metadata"
+      >
+        <source src="assets/gotham-rain-loop.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="index.html">Borhan Rahmani</a>
+      <button
+        class="header-menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="header-menu"
+        aria-label="Open menu"
+      >
+        <span class="header-menu-icon" aria-hidden="true"></span>
+      </button>
+      <div class="header-menu" id="header-menu">
+        <nav class="site-nav" aria-label="Main navigation">
+          <a href="#about">Dossier</a>
+          <a href="#work">Case Files</a>
+          <a href="#experience">Field Ops</a>
+          <a href="#contact">Signal</a>
+        </nav>
+        <div class="header-actions">
+          <a class="button button-solid" href="index.html">Themes</a>
+        </div>
+      </div>
+    </header>
+    <section class="gotham-status" aria-label="Gotham status">
+      <p><span>Sector:</span> Narrows Grid</p>
+      <p><span>Rain Index:</span> Elevated</p>
+      <p><span>Signal:</span> Active</p>
+      <p><span>Case Queue:</span> 04 Open</p>
+    </section>
+
+    <main>
+      <section class="intro-strip">
+        <p class="batman-kicker">Gotham Case File // Portfolio Edition</p>
+        <p
+          class="batman-quote"
+          data-text="Gotham rewards clarity under pressure."
+        >
+          Gotham rewards clarity under pressure.
+        </p>
+      </section>
+
+      <section id="about" class="section about about-top">
+        <div class="section-heading">
+          <h1>Dossier</h1>
+        </div>
+        <div class="about-layout">
+          <div class="about-copy">
+            <p>
+              Hi! My name is Borhan and I'm a UBC graduate with a degree in
+              Computer Science and Microbiology/Physiology. My passion sits at
+              the intersection of healthcare, technology, and UX, so I naturally
+              gravitate toward products where clarity and thoughtful user
+              experience matter. The type of work I enjoy involves turning
+              messy, complex ideas into products people actually want to use
+              through research-informed, collaborative, and iterative workflows.
+            </p>
+            <p>
+              On my spare time, I love staying active whether that be hiking,
+              playing basketball, or working out. A healthy body is a healthy
+              mind! When I'm feeling lazy, I like exploring visual inspiration
+              from film, architecture, and everyday interfaces, and maybe even
+              sketching quick ideas just for fun. It keeps me curious and helps
+              me bring fresh perspective into the products I build.
+            </p>
+            <p>
+              If you want to discuss innovation in health tech or design, movie
+              easter eggs, or just chat, don't hesitate to reach out.
+            </p>
+          </div>
+          <figure class="portrait-placeholder">
+            <img src="assets/borhan-batman-profile.png" alt="Portrait of Borhan" />
+          </figure>
+        </div>
+      </section>
+
+      <section id="work" class="section">
+        <div class="section-heading">
+          <h1>Case Files</h1>
+          <p>
+            A few of my projects and case studies that turn complex technical
+            concepts into practical, user-centered solutions.
+          </p>
+        </div>
+
+        <div class="work-grid">
+          <article class="project-card feature">
+            <p class="project-meta"><span class="case-id">CASE_01</span> UX/Product</p>
+            <h2>Wrapped</h2>
+            <p>
+              A productivity app that reduces digital distractions 
+              through personalized nudges and progress visualization.
+            </p>
+            <ul class="chip-list">
+              <li class="chip-research">Field Research</li>
+              <li class="chip-design">Prototyping</li>
+              <li class="chip-analysis">R / Statistical Analysis</li>
+              <li class="chip-design">Figma</li>
+              <li class="chip-code">TypeScript</li>
+            </ul>
+            <a
+              class="text-link case-study-trigger"
+              href="#"
+              data-case-study="case-study-1"
+              >Open case study -></a
+            >
+          </article>
+
+          <article class="project-card">
+            <p class="project-meta"><span class="case-id">CASE_02</span> Database/Software</p>
+            <h2>PortObello</h2>
+            <p>A port logistics management system that streamlines queries and pulls.</p>
+            <ul class="chip-list">
+              <li class="chip-analysis">SQL</li>
+              <li class="chip-architecture">System Architecture</li>
+              <li class="chip-code">REST API</li>
+            </ul>
+            <a
+              class="text-link case-study-trigger"
+              href="#"
+              data-case-study="case-study-2"
+              >Open case study -></a
+            >
+          </article>
+
+          <article class="project-card">
+            <p class="project-meta"><span class="case-id">CASE_03</span> UI/Design</p>
+            <h2>Marketplace Redesign</h2>
+            <p>Research led redesign that improves findability and trust metrics.</p>
+            <ul class="chip-list">
+              <li class="chip-design">Figma</li>
+              <li class="chip-design">Interactions</li>
+              <li class="chip-research">Usability Tests</li>
+            </ul>
+            <a
+              class="text-link case-study-trigger"
+              href="#"
+              data-case-study="case-study-3"
+              >Open case study -></a
+            >
+          </article>
+
+          <article class="project-card">
+            <p class="project-meta"><span class="case-id">CASE_04</span> Software</p>
+            <h2>Evently.</h2>
+            <p>Event planning web app that turns guest info into clear data for hosts.</p>
+            <ul class="chip-list">
+              <li class="chip-code">Full Stack</li>
+              <li class="chip-analysis">Data Viz</li>
+              <li class="chip-architecture">Client-Server</li>
+            </ul>
+            <a
+              class="text-link case-study-trigger"
+              href="#"
+              data-case-study="case-study-4"
+              >Open case study -></a
+            >
+          </article>
+        </div>
+      </section>
+
+      <section id="experience" class="section experience">
+        <div class="section-heading">
+          <h1>Field Ops</h1>
+          <p>
+            Experience highlights focused on ownership, execution, and measurable
+            impact across teams and deliverables.
+          </p>
+        </div>
+        <div class="experience-list">
+          <article class="experience-item">
+            <div class="experience-head">
+              <h3>Software Engineer</h3>
+              <p class="experience-company">3BA Printing</p>
+            </div>
+            <p class="experience-meta">September 2025 - Present</p>
+            <div class="experience-summary-row">
+              <p class="experience-summary">
+                Building an end-to-end scoliosis detection and brace generation
+                platform that combines ML analysis, 3D tooling, and
+                production ready backend systems.
+              </p>
+              <button
+                class="experience-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="experience-details-1"
+              >
+                View more
+              </button>
+            </div>
+            <div
+              class="experience-details"
+              id="experience-details-1"
+              aria-hidden="true"
+            >
+              <div class="experience-details-inner">
+                <p>
+                  Contributed health science knowledge across model integration, platform
+                  architecture, and delivery workflows to support a
+                  clinician aligned product from prototype to deployable system.
+                </p>
+                <ul class="experience-points">
+                  <li>
+                    Unified scoliosis brace planning into a single imaging-to-editing
+                    workflow, by designing an ML scoliosis detection and brace generation
+                    system with landmark detection, curve analysis, and
+                    GLB/STL template pipelines.
+                  </li>
+                  <li>
+                    Delivered clinical grade model performance, reaching a
+                    physician validated 5% error margin by
+                    tuning PyTorch/torchvision models and
+                    OpenCV/Pillow/NumPy/SciPy preprocessing on X-rays.
+                  </li>
+                  <li>
+                    Improved deployment reliability and reduced manual
+                    handoffs through stable execution across five
+                    pipeline stages, by implementing three Dockerized services
+                    with health checks and shared volumes.
+                  </li> 
+                  <li>
+                    Established full backend operational coverage through 64
+                    release-ready REST endpoints, by building Express +
+                    SQLite services across auth, patients, cases, analytics,
+                    and file workflows.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-item">
+            <div class="experience-head">
+              <h3>Business Analytics and Venture Capital Intern</h3>
+              <p class="experience-company">HP Tech Ventures</p>
+            </div>
+            <p class="experience-meta">June 2024 - August 2024</p>
+            <div class="experience-summary-row">
+              <p class="experience-summary">
+                Turned market, macroeconomic, and company performance data into
+                investment ready insights that supported startup evaluation and
+                venture decision making.
+              </p>
+              <button
+                class="experience-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="experience-details-2"
+              >
+                View more
+              </button>
+            </div>
+            <div
+              class="experience-details"
+              id="experience-details-2"
+              aria-hidden="true"
+            >
+              <div class="experience-details-inner">
+                <p>
+                  Supported venture capital analysis by combining structured data
+                  tooling with market research and strategic profiling across
+                  early stage AI companies.
+                </p>
+                <ul class="experience-points">
+                  <li>
+                    Streamlined side-by-side company evaluations, by organizing fragmented
+                    earnings and operating data with SQL, Tableau, and Excel, resulting in faster 
+                    comparative review cycles.
+                  </li>
+                  <li>
+                    Improved investment narrative clarity by
+                    synthesizing 70+ macroeconomic reports into concise briefs leading to stronger
+                    risk and growth framing in reviews.
+                  </li>
+                  <li>
+                    Evaluated 30 AI startups on product differentiation and strategic positioning, 
+                    contributing to recommendations tied to funding decisions up to $5,000,000.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-item">
+            <div class="experience-head">
+              <h3>Product Designer</h3>
+              <p class="experience-company">LeftInDust</p>
+            </div>
+            <p class="experience-meta">February 2022 - March 2023</p>
+            <div class="experience-summary-row">
+              <p class="experience-summary">
+                Designed end-to-end UX for an Electronic Medical Records (EMR) platform aimed at 
+                replacing the current, outdated systems causing stress in the medical-technology 
+                space.
+              </p>
+              <button
+                class="experience-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="experience-details-3"
+              >
+                View more
+              </button>
+            </div>
+            <div
+              class="experience-details"
+              id="experience-details-3"
+              aria-hidden="true"
+            >
+              <div class="experience-details-inner">
+                <p>
+                  Focused on turning high friction clinical workflows into
+                  usable product experiences while keeping implementation
+                  quality and responsiveness central to design decisions.
+                </p>
+                <ul class="experience-points">
+                  <li>
+                    Improved clinical decision flows with faster data access and
+                    lower cognitive load, by translating
+                    complex ER workflows into clear EMR user journeys and
+                    interface patterns.
+                  </li>
+                  <li>
+                    Increased design-to-development efficiency while reducing
+                    rework across releases, by producing wireframes and
+                    high-fidelity UI states with consistent behavior across
+                    flows.
+                  </li>
+                  <li>
+                    Improved real time alert reliability with more responsive
+                    behavior during validation, by refining alert
+                    states, timing, and feedback patterns with engineers and
+                    stakeholders.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-item">
+            <div class="experience-head">
+              <h3>Quality Control and Data Management Intern</h3>
+              <p class="experience-company">GFR Pharma</p>
+            </div>
+            <p class="experience-meta">April 2022 - August 2022</p>
+            <div class="experience-summary-row">
+              <p class="experience-summary">
+                Improved data operations by leading archive
+                management initiatives, strengthening testing workflows, and
+                maintaining compliance focused documentation standards.
+              </p>
+              <button
+                class="experience-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="experience-details-4"
+              >
+                View more
+              </button>
+            </div>
+            <div
+              class="experience-details"
+              id="experience-details-4"
+              aria-hidden="true"
+            >
+              <div class="experience-details-inner">
+                <p>
+                  Supported pharmaceutical quality control operations across data
+                  management, lab testing, and compliance workflows where
+                  operational consistency directly impacted product safety.
+                </p>
+                <ul class="experience-points">
+                  <li>
+                    Improved archival retrieval efficiency by 12-15%,
+                    by leading four data management and cleaning
+                    initiatives across thousands of files.
+                  </li>
+                  <li>
+                    Strengthened quality and safety adherence through consistent
+                    sample testing coverage, by performing physical
+                    and chemical testing on health products.
+                  </li>
+                  <li>
+                    Reduced return and recall risk through sustained compliance
+                    outcomes, by executing quality control routines
+                    aligned with NHPD and GMP standards.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="resume" class="section split-panel">
+        <div>
+          <h2>Resume</h2>
+        </div>
+        <div class="resume-actions">
+          <a
+            class="button button-solid action-button"
+            href="assets/BorhanRahmaniResume.pdf"
+            target="_blank"
+            rel="noreferrer"
+            >View Resume</a
+          >
+          <button
+            class="button button-ghost action-button"
+            id="download-resume-btn"
+            type="button"
+            data-resume-url="assets/BorhanRahmaniResume.pdf"
+            >Download PDF</button
+          >
+        </div>
+      </section>
+
+      <section id="contact" class="section split-panel">
+        <div>
+          <h2>Signal</h2>
+        </div>
+        <div class="resume-actions">
+          <a
+            class="button button-solid action-button"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=borhanrn01@gmail.com"
+            target="_blank"
+            rel="noreferrer"
+            >Email Me</a
+          >
+          <a
+            class="button button-ghost action-button"
+            href="https://www.linkedin.com/in/borhanrn"
+            target="_blank"
+            rel="noreferrer"
+            >LinkedIn</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <div class="case-modal-backdrop" id="case-modal-backdrop" hidden>
+      <div
+        class="case-modal evidence-board"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="case-modal-title"
+      >
+        <div class="case-modal-header">
+          <h2 id="case-modal-title">Case Study</h2>
+          <button class="button button-ghost" id="case-modal-close" type="button">
+            Close
+          </button>
+        </div>
+        <div class="case-modal-body">
+          <article class="case-modal-content" id="case-study-1" aria-hidden="true">
+            <p class="case-id-modal">CASE_01</p>
+            <h3>Wrapped</h3>
+            <p class="case-meta">My personal favorite</p>
+
+            <p>
+              <a
+                class="button button-ghost case-link case-link-study"
+                href="https://bright-gopher-1dc.notion.site/Wrapped-c723c58c26ca832ca80081cfafd8aaac?source=copy_link"
+                target="_blank"
+                rel="noreferrer"
+                >Full Case Study</a
+              >
+              <a
+                class="button button-ghost case-link case-link-video"
+                href="https://www.youtube.com/watch?v=_C6--8D9Ors"
+                target="_blank"
+                rel="noreferrer"
+                >Lo-Fi Prototype Walkthrough</a
+              >
+              <a
+                class="button button-ghost case-link case-link-video"
+                href="assets/wrapped-prototype-walkthrough.mp4"
+                target="_blank"
+                rel="noreferrer"
+                >Mid-fi Sample Interview</a
+              >
+              <a
+                class="button button-ghost case-link case-link-repo"
+                href="https://github.com/BorhanRN/Wrapped.Hi-Fi"
+                target="_blank"
+                rel="noreferrer"
+                >Hi-Fi Mockup</a
+              >
+            </p>
+
+            <h4>The Inspiration</h4>
+            <p>Screen time is one of those problems everyone knows is hurting them, but most people 
+              don’t change their behavior. Even when users like tracking screen time, they often 
+              don’t take action to reduce it. <br>
+              Most solutions fall into two buckets:
+              <ul><strong>Hard Control:</strong> app blockers and time limits which are effective, but feels restrictive</ul>
+              <ul><strong>Gamification</strong>: apps like Forest which are engaging, but can still be 
+                rigid—and blocks even the apps you might actually need</ul>
+                We wanted something more flexible and personal especially for students who aren’t just “wasting time,” 
+                but are getting pulled into distractions while trying to study.
+            </p>
+
+            <h4>The Concept</h4>
+            <p>Wrapped is a productivity app designed for students who struggle with habitual digital 
+              distractions and messy study routines <br>
+              Instead of locking you out of apps, Wrapped focuses on three ideas:
+              <ol><strong>Personalized task-based nudges:</strong>
+                Prompts that actually reference your current work <br>
+                For example: “You still have ____ to finish. Want to keep scrolling or wrap this up first?”
+              </ol>
+              <ol>
+                <strong>Student-focused study support:</strong>
+                A study session mode with customizable widgets (timers, audio, short breaks, etc.) so students 
+                don’t have to bounce between apps and accidentally spiral into distractions.
+              </ol>
+              <ol>
+                <strong>Light rewards and motivational cues:</strong>
+                The goal is encouragement and progress visibility rather than heavy points and leaderboards 
+                that become a distraction themselves.
+              </ol>
+            </p>
+
+            <h4>The Approach</h4>
+            <p>Through early interviews, surveys, and behavioral observation, we found that motivation was strongly 
+              tied to visible progress and feelings of accomplishment. These findings led us to prioritize 
+              customizable workspaces, goal-based reminders, and flexible study workflows over strict blocking 
+              features. <br> <br>
+              
+              Multiple interaction directions were explored before converging on a hybrid approach that balanced 
+              familiarity with engagement. A key innovation was the nudge system, which references users’ actual 
+              tasks rather than generic alerts. This transforms interruptions into meaningful decision points, 
+              helping students reconnect with their goals in context. <br> <br>
+
+              I developed low and medium fidelity prototypes in Figma and conducted iterative usability testing 
+              using think-aloud sessions and structured walkthroughs, then ran a mixed-methods usability study 
+              with participants comparing different study modes. Participants completed structured tasks while 
+              providing both quantitative feedback and qualitative insights, enabling us to evaluate clarity, 
+              navigation, and engagement across workflows. 
+            </p>
+
+            <h4>For a more in-depth case study analysis along with the prototypes, check out the links at the top!</h4>
+            
+          </article>
+
+          <article class="case-modal-content" id="case-study-2" aria-hidden="true">
+            <p class="case-id-modal">CASE_02</p>
+            <h3>PortObello</h3>
+            <p class="case-meta">Smart Port Logistics Management System</p>
+            <p>
+              <a
+                class="button button-ghost case-link case-link-repo"
+                href="https://github.com/BorhanRN/PortObello"
+                target="_blank"
+                rel="noreferrer"
+                >GitHub Repository</a
+              >
+            </p>
+
+            <h4>The Stack</h4>
+            <p>
+              Node.js, Express.js, OracleDB, SQL, HTML/CSS/JS
+            </p>
+
+            <h4>The Inspiration</h4>
+            <p>
+              Port operations involve many interconnected records which, in real workflows, 
+              often end up fragmented across spreadsheets or inconsistent systems. This can make it 
+              hard to answer questions like "Which ships are carrying the highest-value
+              cargo?" or "Which trade agreements cover all partners?"
+            </p>
+            <p>
+              PortObello was built to provide a single source of truth with a
+              normalized relational schema and an API that supports both
+              operational CRUD and analytical querying.
+            </p>
+
+            <h4>The Backend</h4>
+            <p>
+              Designed and implemented an Oracle relational schema modeling 10
+              interconnected entities, including:
+            </p>
+            <ul>
+              <li>Subtype modeling (Country -> HomeCountry / ForeignCountry)</li>
+              <li>Composite keys (for example, warehouse location)</li>
+              <li>FK relationships and integrity rules across the domain</li>
+            </ul>
+            <p>
+              Built a Node.js + Express REST API integrated with Oracle using
+              the oracledb driver and connection pooling for reliable
+              database access.
+            </p>
+            <p>Implemented endpoints for:</p>
+            <ul>
+              <li>
+                Schema initialization and seeding (drop/create/seed) for
+                repeatable environments
+              </li>
+              <li>
+                Core CRUD operations (insert/update/delete) with relational
+                consistency
+              </li>
+              <li>
+                Analytical SQL queries demonstrating joins, projections,
+                aggregates, and a division-style query (for example, "home
+                countries with trade agreements covering all partners")
+              </li>
+              <li>
+                Dynamic filtering endpoints for user-driven querying (for
+                example, ship queries based on input constraints)
+              </li>
+            </ul>
+            <p>
+              Structured the backend with clear separation of responsibilities
+              (routing/controller/service-style organization), plus consistent
+              error handling and environment-based configuration.
+            </p>
+
+            <h4>For a more in-depth description of the software, check out the link at the top!</h4>
+
+            
+          </article>
+
+          <article class="case-modal-content" id="case-study-3" aria-hidden="true">
+            <p class="case-id-modal">CASE_03</p>
+            <h3>Marketplace Redesign</h3>
+            <p class="case-meta">Research Based UI Overhaul </p>
+            <p>
+              <a
+                class="button button-ghost case-link case-link-study"
+                href="documents/marketplace-usability-redesign.pdf"
+                target="_blank"
+                rel="noreferrer"
+                >Full Research Report</a
+              >
+              <a
+                class="button button-ghost case-link case-link-video"
+                href="assets/marketplace-midfi-walkthrough.mp4"
+                target="_blank"
+                rel="noreferrer"
+                >Mid-Fi Walkthough</a
+              >
+            </p>
+
+            <h4>The Inspiration</h4>
+            <p>
+              Second hand marketplaces are convenient, but the buying flow can
+              feel stressful when search options are chaotic or overwhelming and
+              it is hard to judge seller reliability. This project focused on
+              reducing that friction by improving findability and trust signals
+              in browse, evaluate and message flows.
+            </p>
+
+            <h4>The Concept</h4>
+            <p>
+              I designed a vertical, low-fidelity prototype which was iteratively improved into a 
+              medium-fidelity prototype that keeps the familiar layout while tightening the decision 
+              making loop with category-specific filters, a minimum listing description
+              requirement, and prominent buyer/seller reviews (star rating +
+              sentiment keywords + detailed review access).
+            </p>
+            <p>
+              To support faster browsing, a Quick View on hover feature was added and a Previously 
+              Viewed section for comparison, plus an optional horizontal scroll browsing pattern 
+              inspired by "racks" in a physical second-hand store.
+            </p>
+
+            <h4>The Approach</h4>
+            <p>
+              Through a combination of UX research, product design and implementation minded UI
+              decisions, I set evaluation goals, prototyped the key interactions,
+              then ran a mixed-methods usability study with 6 participants using
+              moderated think-aloud tasks, task timing, and post-task interviews.
+            </p>
+            <p>
+              Results showed improved learnability (average task time of 2:36 down to
+              1:36, a 60-second decrease) and strong navigation sentiment
+              (7.83/10). Trust features performed especially well with participants
+              reporting it was easy to assess seller reliability due to the optimized
+              review system while horizontal scrolling received mixed feedback
+              and was flagged for iteration.
+            </p>
+
+            <h4>For the full research paper and prototype walkthough, check out the links at the top!</h4>
+
+          </article>
+
+          <article class="case-modal-content" id="case-study-4" aria-hidden="true">
+            <p class="case-id-modal">CASE_04</p>
+            <h3>Evently</h3>
+            <p class="case-meta">Hackathon Project</p>
+            <p>
+              <a
+                class="button button-ghost case-link case-link-repo"
+                href="https://github.com/BorhanRN/Evently"
+                target="_blank"
+                rel="noreferrer"
+                >GitHub Repository</a
+              >
+              <a
+                class="button button-ghost case-link case-link-study"
+                href="https://devpost.com/software/evently-sdj481"
+                target="_blank"
+                rel="noreferrer"
+                >Application Walkthough</a
+              >
+            </p>
+
+            <h4>The Stack</h4>
+            <p>
+              React, MongoDB/Mongoose, Chart.js, Node.js, Express.js, JWT
+            </p>
+
+            <h4>The Inspiration</h4>
+            <p>
+              Event planning often falls apart at the details stage with dietary
+              restrictions, accessibility needs, and RSVP certainty being unpredictable. 
+              The common workarounds and generic form tools do not feel purposefully built for
+              collecting and summarizing guest needs for hosts. Evently was created as a 
+              hackathon project, turned game changing alternative focused on inclusive,
+              accommodation-first event planning.
+            </p>
+
+            <h4>The Concept</h4>
+            <p>
+              Evently is a full-stack event planner where users can sign up and
+              log in, create events, and capture guest inputs (for example,
+              diet category, accessibility needs, and RSVP) in a structured
+              way. Hosts can then view a dashboard style event page that
+              aggregates responses into charts (Bar, Doughnut, and PolarArea) to
+              quickly understand what accommodations are needed.
+            </p>
+
+            <h4>The Approach</h4>
+            <p>
+              Built a MERN implementation with security and data visualization
+              in mind:
+            </p>
+            <ul>
+              <li>
+                Backend (Node/Express + MongoDB/Mongoose): environment-based
+                configuration, CORS-enabled API, and user authentication with
+                bcrypt password hashing, Joi validation (including password
+                complexity), and JWT tokens (1-day expiry). The API exposes
+                endpoints for signup (POST /users) and login (POST /auth), and
+                runs on port 3001 in development.
+              </li>
+              <li>
+                Frontend (React): route-guarded navigation based on a stored
+                auth token, form-based signup/login flows wired to the API, and
+                a UI built with Bootstrap/React-Bootstrap plus React Modal for
+                event creation UX. The event view uses Chart.js (via
+                react-chartjs-2) and client-side parsing to transform response
+                data into chart-ready datasets.
+              </li>
+            </ul>
+            
+            <h4>For a more in-depth description of the software along with the walkthrough, check out the links at the top!</h4>
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <script src="theme-batman.js"></script>
+  </body>
+</html>
+
+
+

@@ -46,6 +46,104 @@ if (siteHeader && headerMenuToggle) {
   });
 }
 
+function initProjectCardGlow() {
+  if (
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    return;
+  }
+
+  const projectCards = Array.from(document.querySelectorAll(".work-grid .project-card"));
+  if (!projectCards.length) return;
+
+  const settings = {
+    inactiveZone: 0.56,
+    proximity: 18,
+    easing: 0.24,
+  };
+
+  let pointerX = 0;
+  let pointerY = 0;
+  let hasPointer = false;
+  let frameId = 0;
+
+  projectCards.forEach((card) => {
+    card.classList.add("project-card-glow");
+    card.style.setProperty("--card-glow-active", "0");
+    card.style.setProperty("--card-glow-angle", "0deg");
+    card.dataset.glowAngle = "0";
+  });
+
+  const updateGlow = () => {
+    frameId = 0;
+
+    projectCards.forEach((card) => {
+      const rect = card.getBoundingClientRect();
+      if (!hasPointer) {
+        card.style.setProperty("--card-glow-active", "0");
+        return;
+      }
+
+      const isNearby =
+        pointerX > rect.left - settings.proximity &&
+        pointerX < rect.right + settings.proximity &&
+        pointerY > rect.top - settings.proximity &&
+        pointerY < rect.bottom + settings.proximity;
+
+      if (!isNearby) {
+        card.style.setProperty("--card-glow-active", "0");
+        return;
+      }
+
+      const centerX = rect.left + rect.width * 0.5;
+      const centerY = rect.top + rect.height * 0.5;
+      const distanceFromCenter = Math.hypot(pointerX - centerX, pointerY - centerY);
+      const inactiveRadius = 0.5 * Math.min(rect.width, rect.height) * settings.inactiveZone;
+
+      if (distanceFromCenter < inactiveRadius) {
+        card.style.setProperty("--card-glow-active", "0");
+        return;
+      }
+
+      const targetAngle = (Math.atan2(pointerY - centerY, pointerX - centerX) * 180) / Math.PI + 90;
+      const currentAngle = Number(card.dataset.glowAngle || "0");
+      const angleDelta = ((targetAngle - currentAngle + 540) % 360) - 180;
+      const nextAngle = currentAngle + angleDelta * settings.easing;
+
+      card.dataset.glowAngle = String(nextAngle);
+      card.style.setProperty("--card-glow-angle", `${nextAngle}deg`);
+      card.style.setProperty("--card-glow-active", "1");
+    });
+  };
+
+  const queueGlowUpdate = () => {
+    if (frameId) return;
+    frameId = window.requestAnimationFrame(updateGlow);
+  };
+
+  document.addEventListener(
+    "pointermove",
+    (event) => {
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      hasPointer = true;
+      queueGlowUpdate();
+    },
+    { passive: true }
+  );
+
+  window.addEventListener("scroll", queueGlowUpdate, { passive: true });
+  window.addEventListener("resize", queueGlowUpdate);
+  document.addEventListener("mouseout", (event) => {
+    if (event.relatedTarget) return;
+    hasPointer = false;
+    queueGlowUpdate();
+  });
+
+  queueGlowUpdate();
+}
+
 function resetCaseModalScroll() {
   if (!caseModalBody) return;
   caseModalBody.scrollTop = 0;
@@ -208,3 +306,5 @@ document.addEventListener("keydown", (event) => {
     closeCaseModal();
   }
 });
+
+initProjectCardGlow();
