@@ -84,13 +84,19 @@ function prefersReducedMotion() {
 }
 
 function initPrelude() {
+  const MIN_PRELUDE_DURATION_MS = 2880;
+  const preludeStartMs = performance.now();
+
   const finishPrelude = () => {
+    const elapsedMs = performance.now() - preludeStartMs;
+    const remainingMs = Math.max(0, MIN_PRELUDE_DURATION_MS - elapsedMs);
+
     window.setTimeout(() => {
       body.classList.add("is-loaded");
       if (prelude) {
         prelude.setAttribute("aria-hidden", "true");
       }
-    }, 620);
+    }, remainingMs);
   };
 
   if (document.readyState === "complete") {
