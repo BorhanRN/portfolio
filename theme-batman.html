@@ -67,10 +67,17 @@
       </button>
       <div class="header-menu" id="header-menu">
         <nav class="site-nav" aria-label="Main navigation">
-          <a href="#about">Dossier</a>
-          <a href="#work">Case Files</a>
-          <a href="#experience">Field Ops</a>
-          <a href="#contact">Signal</a>
+          <button
+            class="nav-batcommand-trigger"
+            type="button"
+            data-open-batcommand
+            aria-haspopup="dialog"
+            aria-controls="batcommand-backdrop"
+          >
+            <span class="cmd-prompt" aria-hidden="true">root@gotham:~$</span>
+            <span class="cmd-label">enter your command</span>
+            <span class="cmd-key" aria-hidden="true">/</span>
+          </button>
         </nav>
         <div class="header-actions">
           <a class="button button-solid" href="index.html">Themes</a>
@@ -85,49 +92,49 @@
     </section>
 
     <main>
-      <section class="intro-strip">
-        <p class="batman-kicker">Gotham Case File // Portfolio Edition</p>
-        <p
-          class="batman-quote"
-          data-text="Gotham rewards clarity under pressure."
-        >
-          Gotham rewards clarity under pressure.
-        </p>
-      </section>
+        <section class="intro-strip">
+          <p class="batman-kicker">Gotham Case File // Portfolio Edition</p>
+          <p
+            class="batman-quote"
+            data-text="Gotham rewards clarity under pressure."
+          >
+            Gotham rewards clarity under pressure.
+          </p>
+        </section>
 
-      <section id="about" class="section about about-top">
-        <div class="section-heading">
-          <h1>Dossier</h1>
-        </div>
-        <div class="about-layout">
-          <div class="about-copy">
-            <p>
-              Hi! My name is Borhan and I'm a UBC graduate with a degree in
-              Computer Science and Microbiology/Physiology. My passion sits at
-              the intersection of healthcare, technology, and UX, so I naturally
-              gravitate toward products where clarity and thoughtful user
-              experience matter. The type of work I enjoy involves turning
-              messy, complex ideas into products people actually want to use
-              through research-informed, collaborative, and iterative workflows.
-            </p>
-            <p>
-              On my spare time, I love staying active whether that be hiking,
-              playing basketball, or working out. A healthy body is a healthy
-              mind! When I'm feeling lazy, I like exploring visual inspiration
-              from film, architecture, and everyday interfaces, and maybe even
-              sketching quick ideas just for fun. It keeps me curious and helps
-              me bring fresh perspective into the products I build.
-            </p>
-            <p>
-              If you want to discuss innovation in health tech or design, movie
-              easter eggs, or just chat, don't hesitate to reach out.
-            </p>
+        <section id="about" class="section about about-top">
+          <div class="section-heading">
+            <h1>Dossier</h1>
           </div>
-          <figure class="portrait-placeholder">
-            <img src="assets/borhan-batman-profile.png" alt="Portrait of Borhan" />
-          </figure>
-        </div>
-      </section>
+          <div class="about-layout">
+            <div class="about-copy">
+              <p>
+                Hi! My name is Borhan and I'm a UBC graduate with a degree in
+                Computer Science and Microbiology/Physiology. My passion sits at
+                the intersection of healthcare, technology, and UX, so I naturally
+                gravitate toward products where clarity and thoughtful user
+                experience matter. The type of work I enjoy involves turning
+                messy, complex ideas into products people actually want to use
+                through research-informed, collaborative, and iterative workflows.
+              </p>
+              <p>
+                In my spare time, I love staying active whether that be hiking,
+                playing basketball, or working out. A healthy body is a healthy
+                mind! When I'm feeling lazy, I like exploring visual inspiration
+                from film, architecture, and everyday interfaces, and maybe even
+                sketching quick ideas just for fun. It keeps me curious and helps
+                me bring fresh perspective into the products I build.
+              </p>
+              <p>
+                If you want to discuss innovation in health tech or design, movie
+                easter eggs, or just chat, don't hesitate to reach out.
+              </p>
+            </div>
+            <figure class="portrait-placeholder">
+              <img src="assets/borhan-batman-profile.png" alt="Portrait of Borhan" />
+            </figure>
+          </div>
+        </section>
 
       <section id="work" class="section">
         <div class="section-heading">
@@ -214,7 +221,7 @@
         </div>
       </section>
 
-      <section id="experience" class="section experience">
+        <section id="experience" class="section experience">
         <div class="section-heading">
           <h1>Field Ops</h1>
           <p>
@@ -448,7 +455,7 @@
         </div>
       </section>
 
-      <section id="resume" class="section split-panel">
+        <section id="resume" class="section split-panel">
         <div>
           <h2>Resume</h2>
         </div>
@@ -470,7 +477,7 @@
         </div>
       </section>
 
-      <section id="contact" class="section split-panel">
+        <section id="contact" class="section split-panel">
         <div>
           <h2>Signal</h2>
         </div>
@@ -492,6 +499,42 @@
         </div>
       </section>
     </main>
+    <div class="batcommand-backdrop" id="batcommand-backdrop" hidden>
+      <div
+        class="batcommand"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="batcommand-title"
+      >
+        <div class="batcommand-header">
+          <h2 id="batcommand-title">enter your command</h2>
+          <p>Quick jump and actions for faster navigation.</p>
+        </div>
+        <div class="batcommand-input-wrap">
+          <span aria-hidden="true">></span>
+          <input
+            id="batcommand-input"
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Type to filter commands..."
+            aria-label="Filter commands"
+          />
+        </div>
+        <ul class="batcommand-list" id="batcommand-list">
+          <li><button class="batcommand-item" type="button" data-command-target="about" data-search="jump dossier about">Jump: Dossier</button></li>
+          <li><button class="batcommand-item" type="button" data-command-target="work" data-search="jump case files work">Jump: Case Files</button></li>
+          <li><button class="batcommand-item" type="button" data-command-target="experience" data-search="jump field ops experience">Jump: Field Ops</button></li>
+          <li><button class="batcommand-item" type="button" data-command-target="contact" data-search="jump signal contact">Jump: Signal</button></li>
+          <li><button class="batcommand-item" type="button" data-command-case="case-study-1" data-search="open case 01 wrapped">Open Case 01: Wrapped</button></li>
+          <li><button class="batcommand-item" type="button" data-command-case="case-study-2" data-search="open case 02 portobello">Open Case 02: PortObello</button></li>
+          <li><button class="batcommand-item" type="button" data-command-case="case-study-3" data-search="open case 03 marketplace redesign">Open Case 03: Marketplace</button></li>
+          <li><button class="batcommand-item" type="button" data-command-case="case-study-4" data-search="open case 04 evently">Open Case 04: Evently</button></li>
+          <li><button class="batcommand-item" type="button" data-command-download data-search="download resume pdf cv">Download Resume</button></li>
+          <li><button class="batcommand-item" type="button" data-command-contact data-search="contact email linkedin signal">Contact</button></li>
+        </ul>
+      </div>
+    </div>
 
     <div class="case-modal-backdrop" id="case-modal-backdrop" hidden>
       <div
@@ -512,7 +555,7 @@
             <h3>Wrapped</h3>
             <p class="case-meta">My personal favorite</p>
 
-            <p>
+            <p class="case-links">
               <a
                 class="button button-ghost case-link case-link-study"
                 href="https://bright-gopher-1dc.notion.site/Wrapped-c723c58c26ca832ca80081cfafd8aaac?source=copy_link"
@@ -544,53 +587,84 @@
             </p>
 
             <h4>The Inspiration</h4>
-            <p>Screen time is one of those problems everyone knows is hurting them, but most people 
-              don’t change their behavior. Even when users like tracking screen time, they often 
-              don’t take action to reduce it. <br>
-              Most solutions fall into two buckets:
-              <ul><strong>Hard Control:</strong> app blockers and time limits which are effective, but feels restrictive</ul>
-              <ul><strong>Gamification</strong>: apps like Forest which are engaging, but can still be 
-                rigid—and blocks even the apps you might actually need</ul>
-                We wanted something more flexible and personal especially for students who aren’t just “wasting time,” 
-                but are getting pulled into distractions while trying to study.
+            <p>
+              Screen time is one of those problems everyone knows is hurting
+              them, but most people don't change their behavior. Even when
+              users like tracking screen time, they often don't take action to
+              reduce it.
             </p>
+            <p>Most solutions fall into two buckets:</p>
+            <ul>
+              <li>
+                <strong>Hard Control:</strong> app blockers and time limits
+                which are effective, but feels restrictive.
+              </li>
+              <li>
+                <strong>Gamification:</strong> apps like Forest which are
+                engaging, but can still be rigid, and blocks even the apps you
+                might actually need.
+              </li>
+            </ul>
+            <p>
+              We wanted something more flexible and personal especially for
+              students who aren't just "wasting time," but are getting pulled
+              into distractions while trying to study.
+            </p>
+
 
             <h4>The Concept</h4>
-            <p>Wrapped is a productivity app designed for students who struggle with habitual digital 
-              distractions and messy study routines <br>
-              Instead of locking you out of apps, Wrapped focuses on three ideas:
-              <ol><strong>Personalized task-based nudges:</strong>
-                Prompts that actually reference your current work <br>
-                For example: “You still have ____ to finish. Want to keep scrolling or wrap this up first?”
-              </ol>
-              <ol>
-                <strong>Student-focused study support:</strong>
-                A study session mode with customizable widgets (timers, audio, short breaks, etc.) so students 
-                don’t have to bounce between apps and accidentally spiral into distractions.
-              </ol>
-              <ol>
-                <strong>Light rewards and motivational cues:</strong>
-                The goal is encouragement and progress visibility rather than heavy points and leaderboards 
-                that become a distraction themselves.
-              </ol>
+            <p>
+              Wrapped is a productivity app designed for students who struggle
+              with habitual digital distractions and messy study routines.
             </p>
+            <p>
+              Instead of locking users out of apps, Wrapped focuses on three
+              ideas:
+            </p>
+            <ol>
+              <li>
+                <strong>Personalized task-based nudges:</strong> Prompts that
+                reference current work, for example:
+                "You still have ____ to finish. Want to keep scrolling or wrap
+                this up first?"
+              </li>
+              <li>
+                <strong>Student-focused study support:</strong> A study session
+                mode with customizable widgets (timers, audio, short breaks,
+                etc.) so students don't bounce between apps and accidentally
+                spiral into distractions.
+              </li>
+              <li>
+                <strong>Light rewards and motivational cues:</strong> The goal
+                is encouragement and progress visibility rather than heavy
+                points and leaderboards that become a distraction themselves.
+              </li>
+            </ol>
 
             <h4>The Approach</h4>
-            <p>Through early interviews, surveys, and behavioral observation, we found that motivation was strongly 
-              tied to visible progress and feelings of accomplishment. These findings led us to prioritize 
-              customizable workspaces, goal-based reminders, and flexible study workflows over strict blocking 
-              features. <br> <br>
-              
-              Multiple interaction directions were explored before converging on a hybrid approach that balanced 
-              familiarity with engagement. A key innovation was the nudge system, which references users’ actual 
-              tasks rather than generic alerts. This transforms interruptions into meaningful decision points, 
-              helping students reconnect with their goals in context. <br> <br>
-
-              I developed low and medium fidelity prototypes in Figma and conducted iterative usability testing 
-              using think-aloud sessions and structured walkthroughs, then ran a mixed-methods usability study 
-              with participants comparing different study modes. Participants completed structured tasks while 
-              providing both quantitative feedback and qualitative insights, enabling us to evaluate clarity, 
-              navigation, and engagement across workflows. 
+            <p>
+              Through early interviews, surveys, and behavioral observation, we
+              found that motivation was strongly tied to visible progress and
+              feelings of accomplishment. These findings led us to prioritize
+              customizable workspaces, goal-based reminders, and flexible study
+              workflows over strict blocking features.
+            </p>
+            <p>
+              Multiple interaction directions were explored before converging on
+              a hybrid approach that balanced familiarity with engagement. A key
+              innovation was the nudge system, which references users' actual
+              tasks rather than generic alerts. This transforms interruptions
+              into meaningful decision points and helps students reconnect with
+              their goals in context.
+            </p>
+            <p>
+              I developed low- and medium-fidelity prototypes in Figma,
+              conducted iterative usability testing using think-aloud sessions
+              and structured walkthroughs, and ran a mixed-methods usability
+              study with participants comparing different study modes.
+              Participants completed structured tasks while providing
+              quantitative feedback and qualitative insights so we could
+              evaluate clarity, navigation, and engagement across workflows.
             </p>
 
             <h4>For a more in-depth case study analysis along with the prototypes, check out the links at the top!</h4>
@@ -601,7 +675,7 @@
             <p class="case-id-modal">CASE_02</p>
             <h3>PortObello</h3>
             <p class="case-meta">Smart Port Logistics Management System</p>
-            <p>
+            <p class="case-links">
               <a
                 class="button button-ghost case-link case-link-repo"
                 href="https://github.com/BorhanRN/PortObello"
@@ -679,7 +753,7 @@
             <p class="case-id-modal">CASE_03</p>
             <h3>Marketplace Redesign</h3>
             <p class="case-meta">Research Based UI Overhaul </p>
-            <p>
+            <p class="case-links">
               <a
                 class="button button-ghost case-link case-link-study"
                 href="documents/marketplace-usability-redesign.pdf"
@@ -692,7 +766,7 @@
                 href="assets/marketplace-midfi-walkthrough.mp4"
                 target="_blank"
                 rel="noreferrer"
-                >Mid-Fi Walkthough</a
+                >Mid-Fi Walkthrough</a
               >
             </p>
 
@@ -735,7 +809,7 @@
               and was flagged for iteration.
             </p>
 
-            <h4>For the full research paper and prototype walkthough, check out the links at the top!</h4>
+            <h4>For the full research paper and prototype walkthrough, check out the links at the top!</h4>
 
           </article>
 
@@ -743,7 +817,7 @@
             <p class="case-id-modal">CASE_04</p>
             <h3>Evently</h3>
             <p class="case-meta">Hackathon Project</p>
-            <p>
+            <p class="case-links">
               <a
                 class="button button-ghost case-link case-link-repo"
                 href="https://github.com/BorhanRN/Evently"
@@ -756,7 +830,7 @@
                 href="https://devpost.com/software/evently-sdj481"
                 target="_blank"
                 rel="noreferrer"
-                >Application Walkthough</a
+                >Application Walkthrough</a
               >
             </p>
 
@@ -819,6 +893,5 @@
     <script src="theme-batman.js"></script>
   </body>
 </html>
-
 
 

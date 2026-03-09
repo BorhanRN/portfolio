@@ -54,8 +54,12 @@ function initProjectCardGlow() {
     return;
   }
 
-  const projectCards = Array.from(document.querySelectorAll(".work-grid .project-card"));
-  if (!projectCards.length) return;
+  const glowCards = Array.from(
+    document.querySelectorAll(
+      ".work-grid .project-card, .experience-item, #resume.split-panel, #contact.split-panel"
+    )
+  );
+  if (!glowCards.length) return;
 
   const settings = {
     inactiveZone: 0.56,
@@ -68,7 +72,7 @@ function initProjectCardGlow() {
   let hasPointer = false;
   let frameId = 0;
 
-  projectCards.forEach((card) => {
+  glowCards.forEach((card) => {
     card.classList.add("project-card-glow");
     card.style.setProperty("--card-glow-active", "0");
     card.style.setProperty("--card-glow-angle", "0deg");
@@ -78,7 +82,7 @@ function initProjectCardGlow() {
   const updateGlow = () => {
     frameId = 0;
 
-    projectCards.forEach((card) => {
+    glowCards.forEach((card) => {
       const rect = card.getBoundingClientRect();
       if (!hasPointer) {
         card.style.setProperty("--card-glow-active", "0");

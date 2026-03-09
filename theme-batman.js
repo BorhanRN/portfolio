@@ -21,18 +21,27 @@ const caseModalContents = document.querySelectorAll(".case-modal-content");
 const caseModalBody = document.querySelector(".case-modal-body");
 const siteHeader = document.querySelector(".site-header");
 const headerMenuToggle = document.querySelector(".header-menu-toggle");
-const headerNavLinks = document.querySelectorAll(".site-nav a");
+const headerNavLinks = document.querySelectorAll(".site-nav a, .site-nav button");
+const batcommandOpeners = document.querySelectorAll("[data-open-batcommand]");
 const quoteElement = document.querySelector(".batman-quote");
 const prelude = document.getElementById("gotham-prelude");
+const batcommandBackdrop = document.getElementById("batcommand-backdrop");
+const batcommandInput = document.getElementById("batcommand-input");
+const batcommandItems = Array.from(document.querySelectorAll(".batcommand-item"));
 const revealTargets = document.querySelectorAll(".gotham-status, .intro-strip, .section");
 const gothamVideoA = document.getElementById("gotham-video-a");
 const gothamVideoB = document.getElementById("gotham-video-b");
 
 let lastCaseStudyTrigger = null;
+let lastBatcommandTrigger = null;
+let caseModalOpenTimer = 0;
+let caseModalCloseTimer = 0;
+let batcommandSelection = -1;
+
+const CASE_MODAL_REVEAL_MS = 860;
+const CASE_MODAL_HIDE_MS = 460;
 
 const state = {
-  quoteTimer: 0,
-  parallaxTicking: false,
   videoLoopFrame: 0,
 };
 
@@ -327,10 +336,233 @@ function initHeaderMenu() {
     });
   });
 
+  batcommandOpeners.forEach((triggerButton) => {
+    triggerButton.addEventListener("click", () => {
+      setHeaderMenuOpen(false);
+      openBatcommand();
+    });
+  });
+
   window.addEventListener("resize", () => {
     if (window.innerWidth > 760) {
       setHeaderMenuOpen(false);
     }
+  });
+}
+
+function isEditableElement(target) {
+  if (!(target instanceof Element)) return false;
+  return Boolean(
+    target.closest(
+      'input, textarea, select, [contenteditable=""], [contenteditable="true"]'
+    )
+  );
+}
+
+function getVisibleBatcommandItems() {
+  return batcommandItems.filter((item) => !item.hidden);
+}
+
+function setBatcommandSelection(index) {
+  const visibleItems = getVisibleBatcommandItems();
+  visibleItems.forEach((item) => item.classList.remove("is-selected"));
+
+  if (!visibleItems.length) {
+    batcommandSelection = -1;
+    return;
+  }
+
+  const clampedIndex = Math.max(0, Math.min(index, visibleItems.length - 1));
+  batcommandSelection = clampedIndex;
+  visibleItems[clampedIndex].classList.add("is-selected");
+}
+
+function filterBatcommand(queryText = "") {
+  const normalizedQuery = queryText.trim().toLowerCase();
+
+  batcommandItems.forEach((item) => {
+    const searchText = (item.dataset.search || item.textContent || "").toLowerCase();
+    item.hidden = normalizedQuery ? !searchText.includes(normalizedQuery) : false;
+  });
+
+  setBatcommandSelection(0);
+}
+
+function closeBatcommand({ restoreFocus = true, immediate = false } = {}) {
+  if (!batcommandBackdrop || batcommandBackdrop.hidden) return;
+  batcommandBackdrop.classList.remove("is-open");
+  document.body.classList.remove("command-open");
+  if (immediate) {
+    batcommandBackdrop.hidden = true;
+  } else {
+    window.setTimeout(() => {
+      if (batcommandBackdrop) {
+        batcommandBackdrop.hidden = true;
+      }
+    }, 180);
+  }
+
+  if (restoreFocus && lastBatcommandTrigger && typeof lastBatcommandTrigger.focus === "function") {
+    lastBatcommandTrigger.focus();
+  }
+}
+
+function jumpToSection(targetId) {
+  const targetSection = document.getElementById(targetId);
+  if (!targetSection) return;
+  targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  history.replaceState(null, "", `#${targetId}`);
+}
+
+function runNightfallEffect() {
+  if (quoteElement) {
+    quoteElement.classList.add("is-glitch");
+    window.setTimeout(() => {
+      quoteElement.classList.remove("is-glitch");
+    }, 320);
+  }
+
+  body.classList.add("is-lightning");
+  window.setTimeout(() => {
+    body.classList.remove("is-lightning");
+  }, 560);
+}
+
+function executeSecretBatcommand(queryText) {
+  const normalized = queryText.toLowerCase().replace(/[\s_-]+/g, "");
+  if (!normalized) return false;
+
+  if (normalized === "batcave" || normalized === "waynemanor") {
+    closeBatcommand();
+    jumpToSection("about");
+    return true;
+  }
+
+  if (normalized === "oracle") {
+    closeBatcommand({ restoreFocus: false, immediate: true });
+    const caseId = "case-study-2";
+    const trigger = document.querySelector(
+      `.case-study-trigger[data-case-study="${caseId}"]`
+    );
+    openCaseModal(caseId, trigger);
+    return true;
+  }
+
+  if (
+    normalized === "nightfall" ||
+    normalized === "vengeance" ||
+    normalized === "iamvengeance"
+  ) {
+    closeBatcommand();
+    runNightfallEffect();
+    return true;
+  }
+
+  return false;
+}
+
+function executeBatcommand(item) {
+  if (!item) return;
+
+  if (item.hasAttribute("data-command-download")) {
+    closeBatcommand();
+    if (downloadResumeBtn) {
+      downloadResumeBtn.click();
+    }
+    return;
+  }
+
+  const targetId =
+    item.getAttribute("data-command-target") ||
+    (item.hasAttribute("data-command-contact") ? "contact" : "");
+  if (targetId) {
+    closeBatcommand();
+    jumpToSection(targetId);
+    return;
+  }
+
+  const caseId = item.getAttribute("data-command-case");
+  if (caseId) {
+    closeBatcommand({ restoreFocus: false, immediate: true });
+    const trigger = document.querySelector(
+      `.case-study-trigger[data-case-study="${caseId}"]`
+    );
+    openCaseModal(caseId, trigger);
+  }
+}
+
+function openBatcommand() {
+  if (!batcommandBackdrop || !batcommandInput || !batcommandItems.length) return;
+  if (!batcommandBackdrop.hidden) return;
+
+  lastBatcommandTrigger = document.activeElement;
+  batcommandBackdrop.hidden = false;
+  document.body.classList.add("command-open");
+  window.requestAnimationFrame(() => {
+    if (batcommandBackdrop) {
+      batcommandBackdrop.classList.add("is-open");
+    }
+  });
+
+  batcommandInput.value = "";
+  filterBatcommand("");
+  batcommandInput.focus();
+}
+
+function initBatcommand() {
+  if (!batcommandBackdrop || !batcommandInput || !batcommandItems.length) return;
+
+  batcommandBackdrop.addEventListener("click", (event) => {
+    if (event.target === batcommandBackdrop) {
+      closeBatcommand();
+    }
+  });
+
+  batcommandInput.addEventListener("input", () => {
+    filterBatcommand(batcommandInput.value);
+  });
+
+  batcommandInput.addEventListener("keydown", (event) => {
+    const visibleItems = getVisibleBatcommandItems();
+
+    if (event.key === "ArrowDown") {
+      if (!visibleItems.length) return;
+      event.preventDefault();
+      setBatcommandSelection(batcommandSelection + 1);
+      return;
+    }
+
+    if (event.key === "ArrowUp") {
+      if (!visibleItems.length) return;
+      event.preventDefault();
+      setBatcommandSelection(batcommandSelection - 1);
+      return;
+    }
+
+    if (event.key === "Enter") {
+      event.preventDefault();
+      if (executeSecretBatcommand(batcommandInput.value)) {
+        return;
+      }
+      if (!visibleItems.length) return;
+      const selectedItem =
+        visibleItems[batcommandSelection] || visibleItems[0];
+      executeBatcommand(selectedItem);
+    }
+  });
+
+  batcommandItems.forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      const visibleItems = getVisibleBatcommandItems();
+      const nextIndex = visibleItems.indexOf(item);
+      if (nextIndex >= 0) {
+        setBatcommandSelection(nextIndex);
+      }
+    });
+
+    item.addEventListener("click", () => {
+      executeBatcommand(item);
+    });
   });
 }
 
@@ -401,10 +633,6 @@ function initQuoteRotation() {
   );
 }
 
-function initSkylineParallax() {
-  // Intentionally no-op when background is video-only.
-}
-
 function resetCaseModalScroll() {
   if (!caseModalBody) return;
   caseModalBody.scrollTop = 0;
@@ -427,24 +655,57 @@ function updateCaseModalTitle(panel) {
   caseModalTitle.textContent = "Case Study";
 }
 
-function closeCaseModal() {
+function clearCaseModalAnimationTimers() {
+  if (caseModalOpenTimer) {
+    window.clearTimeout(caseModalOpenTimer);
+    caseModalOpenTimer = 0;
+  }
+  if (caseModalCloseTimer) {
+    window.clearTimeout(caseModalCloseTimer);
+    caseModalCloseTimer = 0;
+  }
+}
+
+function finalizeCaseModalClose() {
   if (!caseModalBackdrop) return;
-  resetCaseModalScroll();
+  caseModalBackdrop.classList.remove("is-visible", "is-opening", "is-closing");
   caseModalBackdrop.hidden = true;
-  document.body.style.overflow = "";
   caseModalContents.forEach((panel) => {
     panel.classList.remove("is-active");
     panel.setAttribute("aria-hidden", "true");
   });
+  document.body.style.overflow = "";
+  resetCaseModalScroll();
   if (lastCaseStudyTrigger) {
     lastCaseStudyTrigger.focus();
   }
+}
+
+function closeCaseModal() {
+  if (!caseModalBackdrop || caseModalBackdrop.hidden) return;
+  clearCaseModalAnimationTimers();
+
+  if (prefersReducedMotion()) {
+    finalizeCaseModalClose();
+    return;
+  }
+
+  caseModalBackdrop.classList.remove("is-opening", "is-visible");
+  caseModalBackdrop.classList.add("is-closing");
+  document.body.style.overflow = "";
+
+  caseModalCloseTimer = window.setTimeout(() => {
+    finalizeCaseModalClose();
+  }, CASE_MODAL_HIDE_MS);
 }
 
 function openCaseModal(panelId, triggerElement) {
   if (!caseModalBackdrop) return;
   const targetPanel = document.getElementById(panelId);
   if (!targetPanel) return;
+
+  clearCaseModalAnimationTimers();
+  caseModalBackdrop.classList.remove("is-closing");
 
   caseModalContents.forEach((panel) => {
     const isTarget = panel === targetPanel;
@@ -454,6 +715,17 @@ function openCaseModal(panelId, triggerElement) {
 
   updateCaseModalTitle(targetPanel);
   caseModalBackdrop.hidden = false;
+  caseModalBackdrop.classList.add("is-opening");
+  window.requestAnimationFrame(() => {
+    if (!caseModalBackdrop || caseModalBackdrop.hidden) return;
+    caseModalBackdrop.classList.add("is-visible");
+  });
+
+  caseModalOpenTimer = window.setTimeout(() => {
+    if (!caseModalBackdrop || caseModalBackdrop.hidden) return;
+    caseModalBackdrop.classList.remove("is-opening");
+  }, CASE_MODAL_REVEAL_MS);
+
   document.body.style.overflow = "hidden";
   resetCaseModalScroll();
   window.setTimeout(resetCaseModalScroll, 10);
@@ -549,9 +821,28 @@ if (downloadResumeBtn) {
 }
 
 document.addEventListener("keydown", (event) => {
+  if (
+    event.key === "/" &&
+    !event.ctrlKey &&
+    !event.metaKey &&
+    !event.altKey &&
+    !event.repeat &&
+    !isEditableElement(event.target)
+  ) {
+    if (caseModalBackdrop && !caseModalBackdrop.hidden) return;
+    event.preventDefault();
+    openBatcommand();
+    return;
+  }
+
   if (event.key === "Escape") {
+    if (batcommandBackdrop && !batcommandBackdrop.hidden) {
+      closeBatcommand();
+      return;
+    }
     setHeaderMenuOpen(false);
   }
+
   if (!caseModalBackdrop || caseModalBackdrop.hidden) return;
   if (event.key === "Escape") {
     closeCaseModal();
@@ -562,6 +853,6 @@ initPrelude();
 initAtmosphereBackground();
 initRevealTransitions();
 initHeaderMenu();
+initBatcommand();
 initProjectCardGlow();
 initQuoteRotation();
-initSkylineParallax();

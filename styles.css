@@ -527,10 +527,16 @@ button:focus-visible {
   color: #5975a6;
 }
 
+:root[data-theme="light"] .project-card,
+:root[data-theme="light"] .experience-item,
+:root[data-theme="light"] #resume.split-panel,
+:root[data-theme="light"] #contact.split-panel {
+  --card-glow-color: rgba(33, 113, 230, 0.99);
+  --card-glow-color-2: rgba(214, 123, 56, 0.95);
+  --card-glow-shadow: 0 0 14px rgba(64, 121, 222, 0.56);
+}
+
 :root[data-theme="light"] .project-card {
-  --card-glow-color: rgba(33, 113, 230, 0.98);
-  --card-glow-color-2: rgba(214, 123, 56, 0.92);
-  --card-glow-shadow: 0 0 10px rgba(64, 121, 222, 0.45);
   background: linear-gradient(
     165deg,
     rgba(255, 255, 255, 0.95),
@@ -841,15 +847,21 @@ main {
   gap: 0.95rem;
 }
 
-.project-card {
+.project-card,
+.experience-item,
+#resume.split-panel,
+#contact.split-panel {
   --card-glow-angle: 0deg;
   --card-glow-active: 0;
-  --card-glow-border-width: 1.25px;
+  --card-glow-border-width: 1.6px;
   --card-glow-color: rgba(116, 232, 255, 1);
-  --card-glow-color-2: rgba(145, 173, 255, 0.95);
-  --card-glow-shadow: 0 0 12px rgba(111, 219, 255, 0.55);
+  --card-glow-color-2: rgba(255, 164, 95, 0.96);
+  --card-glow-shadow: 0 0 16px rgba(111, 219, 255, 0.72);
   position: relative;
   overflow: hidden;
+}
+
+.project-card {
   grid-column: span 4;
   background: linear-gradient(
     160deg,
@@ -870,7 +882,10 @@ main {
   content: none;
 }
 
-.project-card.project-card-glow::after {
+.project-card.project-card-glow::after,
+.experience-item.project-card-glow::after,
+#resume.split-panel.project-card-glow::after,
+#contact.split-panel.project-card-glow::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -878,14 +893,14 @@ main {
   padding: var(--card-glow-border-width);
   pointer-events: none;
   opacity: var(--card-glow-active);
-  transition: opacity 180ms ease;
+  transition: opacity 150ms ease;
   filter: drop-shadow(var(--card-glow-shadow));
   background: conic-gradient(
     from var(--card-glow-angle),
     transparent 0deg,
-    transparent 298deg,
-    var(--card-glow-color) 326deg,
-    var(--card-glow-color-2) 350deg,
+    transparent 294deg,
+    var(--card-glow-color) 322deg,
+    var(--card-glow-color-2) 348deg,
     transparent 360deg
   );
   -webkit-mask:
