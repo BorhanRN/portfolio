@@ -2629,21 +2629,81 @@ main {
 }
 
 .about-layout {
-  grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
-  gap: 1.35rem;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  gap: 1.2rem;
 }
 
 .portrait-placeholder {
-  order: -1;
+  order: 0;
+  position: relative;
+  isolation: auto;
   border-radius: 0;
   border: 0;
-  box-shadow: none;
-  min-height: 460px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  min-height: 420px;
+}
+
+.portrait-placeholder::before,
+.portrait-placeholder::after {
+  content: none;
+}
+
+.portrait-placeholder img {
+  border-radius: 0;
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 .about-copy {
-  border-left: 3px solid rgba(126, 159, 214, 0.35);
-  padding-left: 1rem;
+  position: relative;
+  overflow: hidden;
+  border-left: 0;
+  border-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.about-copy p {
+  max-width: none;
+  font-size: 1.06rem;
+}
+
+.about-copy::before {
+  content: "";
+  position: absolute;
+  left: 53%;
+  top: 44%;
+  z-index: 3;
+  width: 100%;
+  height: 95%;
+  background: url("assets/why-so-serious.png") center / contain no-repeat;
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  filter: drop-shadow(0 0 10px rgba(193, 35, 48, 0.2));
+  pointer-events: none;
+  user-select: none;
+}
+
+.about-copy::after {
+  content: "";
+  position: absolute;
+  left: -2%;
+  top: 0%;
+  z-index: 3;
+  width: 32%;
+  height: 32%;
+  background: url("assets/joker-smile.png") left top / contain no-repeat;
+  opacity: 1;
+  transform: rotate(-12deg);
+  filter: drop-shadow(0 0 10px rgba(193, 35, 48, 0.2));
+  pointer-events: none;
+  user-select: none;
+}
+
+.about-copy > * {
+  position: relative;
+  z-index: 1;
 }
 
 .work-grid {
@@ -3435,6 +3495,10 @@ main {
 @media (max-width: 760px) {
   .site-header {
     grid-template-columns: 1fr auto;
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr;
   }
 
   .gotham-status {
